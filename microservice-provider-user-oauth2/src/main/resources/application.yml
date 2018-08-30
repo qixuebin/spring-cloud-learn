@@ -1,0 +1,45 @@
+server:
+  port: 8765
+spring:
+  jpa:
+    generate-ddl: false
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+  datasource:
+    platform: h2
+    schema: classpath:schema.sql
+    data: classpath:data.sql
+  application:
+    name: microservice-provider-user-oauth2
+logging:
+  level:
+    root: info
+    org.hibernate: info
+    org.hibernate.type.descriptor.sql.BasicBinder: trace
+    org.hibernate.type.descriptor.sql.BasicExtractor: trace
+    com.itmuch: debug
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8763/eureka
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${server.port}}
+security:
+  oauth2:
+    resource:
+      user-info-uri: http://localhost:8766/user/userinfo
+      prefer-token-info: false
+management:
+  security:
+    enabled: false
+#security:
+#  basic:
+#    enabled: true   #启用SpringSecurity的安全配置项
+#    path: /test/**,/test2/**
+#  user:
+#    name: admin    #认证用户名
+#    password: 111111 #认证密码
+#    role: user
+#  sessions: stateless

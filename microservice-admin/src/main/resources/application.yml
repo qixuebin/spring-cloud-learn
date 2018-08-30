@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: microservice-admin
+  boot:
+    admin:
+      routes:
+        endpoints: env,metrics,trace,dump,jolokia,info,configprops,trace,logfile,refresh,flyway,liquibase,heapdump,hystrix.stream
+server:
+  port: 7905
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${server.port}}
+management:
+  security:
+    enabled: false
+
+##测试,不使用密码
+#management:
+#  security:
+#    enabled: false

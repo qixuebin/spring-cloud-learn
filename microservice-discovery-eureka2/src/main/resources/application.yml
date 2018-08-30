@@ -1,0 +1,18 @@
+##集群
+spring:
+  application:
+    name: microservice-discovery-eureka
+  profiles:
+    active: eureka2
+  cloud:
+    config:
+      name: ${spring.application.name}
+      profile: config,${spring.profiles.active}
+
+#security:
+#  basic:
+#    enabled: true    #启用SpringSecurity的安全配置项
+#  user:
+#    name: jmxjava    #认证用户名
+#    password: jmxhello #认证密码
+#    role: user

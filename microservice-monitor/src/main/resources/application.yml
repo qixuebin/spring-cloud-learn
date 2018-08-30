@@ -1,0 +1,19 @@
+server:
+  port: 7906
+spring:
+  application:
+    name: microservice-monitor
+#  rabbitmq:
+#    addresses: 192.168.10.105:5672
+#    username: stone
+#    password: HgsyKhjanzka1lp1
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${server.port}}
+    hystrix.config.stream.maxConcurrentConnections: 50
+
+

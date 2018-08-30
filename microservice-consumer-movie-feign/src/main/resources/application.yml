@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: microservice-consumer-movie-feign
+server:
+  port: 7901
+user:
+  userServicePath: http://localhost:7900/simple/
+  
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://user:password123@localhost:8761/eureka
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${server.port}}

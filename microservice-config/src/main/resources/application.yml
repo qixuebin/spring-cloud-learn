@@ -1,0 +1,13 @@
+server:
+  port: 7904
+
+spring:
+  application:
+    name: microservice-config
+  profiles:
+    active: native
+  cloud:
+    config:
+      server:
+        native:
+          search-locations: /Users/qixuebin/trunk/spring-cloud-study/hidex

@@ -1,0 +1,71 @@
+spring:
+  application:
+    name: microservice-gateway-zuul-oauth2
+server:
+  port: 8766
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8763/eureka
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${server.port}}
+
+#zuul:
+#  routes:
+#    user:
+#      path: /user-path/**
+#      sensitiveHeaders:
+#      serviceId: microservice-provider-user-oauth2
+#    security:
+#      path: /**
+#      sensitiveHeaders:
+#      serviceId: microservice-security-oauth2
+zuul:
+  routes:
+    core:
+       path: /user-path/**
+       sensitiveHeaders:
+       serviceId:  microservice-provider-user-oauth2
+    bank:
+       path: /**
+       sensitiveHeaders:
+       serviceId: microservice-security-oauth2
+
+security:
+  oauth2:
+    client:
+      access-token-uri: http://localhost:8766/oauth/token
+      user-authorization-uri: http://localhost:8766/oauth/authorize
+      client-id: microservice-gateway-zuul-oauth2
+    resource:
+      user-info-uri: http://localhost:8766/user/userinfo
+      prefer-token-info: false
+
+#zuul:
+#  routes:
+#    microservice-provider-user2: /user/**
+
+
+#zuul:
+#  routes:
+#    users:
+#      path: /user-path/**
+#      serviceId: microservice-provider-user2
+#
+#ribbon:
+#  eureka:
+#    enabled: false
+#
+#microservice-provider-user2:  #serviceId
+#  ribbon:
+#    listOfServers: http://192.168.60.166:7901,http://192.168.60.166:7900
+
+#zuul:
+#  routes:
+#    user:
+#      path: /user-path/**
+#      url: http://192.168.60.166:7901
+
+
+

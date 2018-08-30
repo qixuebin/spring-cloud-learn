@@ -1,0 +1,5 @@
+# spring config server url
+spring:
+  cloud:
+    config:
+      uri: http://localhost:7904
